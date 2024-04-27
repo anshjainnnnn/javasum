@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from GitHub
+                git 'https://github.com/anshjainnnnn/javasum.git'
+            }
+        }
+        
+        stage('Deploy to XAMPP') {
+            steps {
+                // Copy HTML files to XAMPP directory
+                script {
+                    def xamppDir = 'C:\\xampp\\htdocs'
+                    bat "xcopy *.html \"$xamppDir\" /s /y"
+                }
+            }
+        }
+    }
+}
